@@ -1,17 +1,10 @@
-// import { applyMiddleware, compose, createStore } from "redux";
-// import thunk from 'redux-thunk';
-// import { createLogger } from 'redux-logger'
-// import rootReducer from "./reducers";
-//
-//
-//
-// export const store = createStore(rootReducer, applyMiddleware(thunk));
-
-// import { routerMiddleware } from "connected-react-router";
 import { applyMiddleware, compose, createStore } from "redux";
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import {configureStore} from "@reduxjs/toolkit";
+import {customerApi} from "./services/customer";
+import getRootMiddlewares from "./middlewares";
 
 // window.devToolsExtension = window.devToolsExtension;
 
@@ -20,8 +13,6 @@ const loggerMiddleware = createLogger({
 });
 const initialState = {}
 
-// export default function configureStore( initialState={}) {
-    // In development, use the browser's Redux dev tools extension if installed
 let enhancers = [];
 
 console.log("Mode :" + process.env.NODE_ENV);
@@ -41,9 +32,17 @@ if (isDevelopment) {
     middleware = [...middleware, loggerMiddleware];
 }
 
-export default createStore(
-    rootReducer,
-    initialState,
-    compose(applyMiddleware(...middleware), ...enhancers)
-);
-// }
+
+// default REDUX
+// export default createStore(
+//     rootReducer,
+//     initialState,
+//     compose(applyMiddleware(...middleware), ...enhancers)
+// );
+
+export default configureStore({
+    reducer:rootReducer,
+    middleware:(getDefaultMiddleware => (getRootMiddlewares(getDefaultMiddleware,middleware))),
+    preloadedState:initialState,
+    enhancers:enhancers
+})

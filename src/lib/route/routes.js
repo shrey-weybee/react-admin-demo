@@ -3,6 +3,8 @@ import Demo from "../../Demo";
 import DefaultLayout from "../../layout/DefaultLayout";
 import ProductListPage from "../../components/pages/product/ProductListPage";
 import ProductFormPage from "../../components/pages/product/ProductFormPage";
+import CustomerListPage from "../../components/pages/customer/CustomerListPage";
+import CustomerFormPage from "../../components/pages/customer/CustomerFormPage";
 
 const routes = [
     {
@@ -28,6 +30,21 @@ const routes = [
                 path:'/products/update/:productId',
                 name:'Product Update',
                 element:ProductFormPage,
+            },
+            {
+                path:'/customers',
+                name:'Product List',
+                element:CustomerListPage,
+            },
+            {
+                path:'/customers/create',
+                name:'Customer Create',
+                element:CustomerFormPage,
+            },
+            {
+                path:'/customers/update/:customerId',
+                name:'Customer Update',
+                element:CustomerFormPage,
             },
             {
                 path:'/*',

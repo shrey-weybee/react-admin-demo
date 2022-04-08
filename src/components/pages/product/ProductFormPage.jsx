@@ -70,7 +70,7 @@ const ProductFormPage = ({...props}) => {
                                 <div>
                                     <CFormLabel htmlFor="exampleFormControl1">Name</CFormLabel>
                                     <CFormInput type="text" id="exampleFormControl1" {...register('name',{required:true})} invalid={errors.name} placeholder="Name..."/>
-                                    {errors.name && <CFormText className="text-danger">We'll never share your email with anyone else.</CFormText>}
+                                    {errors.name && <CFormText className="text-danger">* Required</CFormText>}
 
                                 </div>
                             </CCol>
@@ -78,14 +78,14 @@ const ProductFormPage = ({...props}) => {
                                 <div>
                                     <CFormLabel htmlFor="exampleFormControl2">Price</CFormLabel>
                                     <CFormInput type="number" id="exampleFormControl2" {...register('price',{required:true})} invalid={errors.price}/>
-                                    {errors.price && <CFormText className="text-danger">We'll never share your email with anyone else.</CFormText>}
+                                    {errors.price && <CFormText className="text-danger">* Required</CFormText>}
                                 </div>
                             </CCol>
                         </CRow>
                         <div className="mb-3">
                             <CFormLabel htmlFor="exampleFormControl3">Link</CFormLabel>
                             <CFormInput type="text" id="exampleFormControl3" placeholder="Link..." {...register('link',{required:true})} invalid={errors.link} />
-                            {errors.link && <CFormText className="text-danger">We'll never share your email with anyone else.</CFormText>}
+                            {errors.link && <CFormText className="text-danger">* Required</CFormText>}
                         </div>
                         <div className="mb-3">
                             <CFormLabel htmlFor="exampleFormControl4">Description</CFormLabel>

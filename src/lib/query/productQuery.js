@@ -1,4 +1,4 @@
-import {BASE_URL} from "./apiConfig";
+import {BASE_URL} from "../api/apiConfig";
 
 const PRODUCT_BASE_URL = `${BASE_URL}/products`
 

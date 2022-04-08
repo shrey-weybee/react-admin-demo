@@ -28,5 +28,42 @@
       "desc": "Pariatur Commodo qu",
       "id": 4
     }
+  ],
+  "customers": [
+    {
+      "company": "hycolozy@mailinator.com",
+      "primary_contact": "zajumeqa@mailinator.com",
+      "primary_email": "pebexu@mailinator.com",
+      "phone": "+1 (478) 995-9549",
+      "id": 1
+    },
+    {
+      "company": "qelajyxo@mailinator.com",
+      "primary_contact": "gegoqexizi@mailinator.com",
+      "primary_email": "citusa@mailinator.com",
+      "phone": "+1 (199) 414-9524",
+      "id": 3
+    },
+    {
+      "company": "rebomuri@mailinator.com",
+      "primary_contact": "ficoseme@mailinator.com",
+      "primary_email": "cedizaf@mailinator.com",
+      "phone": "+1 (339) 156-8519",
+      "id": 4
+    },
+    {
+      "company": "sada@mailinator.com",
+      "primary_contact": "wifaj@mailinator.com",
+      "primary_email": "sipu@mailinator.com",
+      "phone": "+1 (996) 301-2433",
+      "id": 5
+    },
+    {
+      "company": "kedovum@mailinator.com",
+      "primary_contact": "wudym@mailinator.com",
+      "primary_email": "tuhi@mailinator.com",
+      "phone": "+1 (622) 661-1437",
+      "id": 6
+    }
   ]
 }
