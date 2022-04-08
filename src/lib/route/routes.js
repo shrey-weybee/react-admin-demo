@@ -25,7 +25,7 @@ const routes = [
                 element:ProductFormPage,
             },
             {
-                path:'/products/update',
+                path:'/products/update/:productId',
                 name:'Product Update',
                 element:ProductFormPage,
             },

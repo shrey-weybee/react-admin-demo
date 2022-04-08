@@ -11,10 +11,16 @@ import {
     CTableRow
 } from "@coreui/react";
 import {NavLink} from "react-router-dom";
-import {useQuery} from "react-query";
-import {getAllProducts} from "../../../lib/query/productQuery";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {deleteProduct, getAllProducts} from "../../../lib/query/productQuery";
 
 const ProductListPage = ({...props}) => {
+    const queryClient = useQueryClient()
+    const {mutate:deleteProductMutate} = useMutation(deleteProduct,{
+        onSettled:()=>{
+            queryClient.invalidateQueries('products')
+        }
+    })
 
     const {data:products,isLoading,isFetching} = useQuery('products',getAllProducts,{
         initialData:[]
@@ -27,7 +33,6 @@ const ProductListPage = ({...props}) => {
                     <CRow className="justify-content-between">
                         <CCol>
                             <CCardTitle>Product List</CCardTitle>
-                            {JSON.stringify(products)}
                         </CCol>
                         <CCol sm="auto">
                             <CButtonGroup role="group" aria-label="Basic example" className="gap-2">
@@ -56,18 +61,18 @@ const ProductListPage = ({...props}) => {
                                 <CTableBody>
                                     {products && products.map((product, index) => (
                                         <CTableRow key={index}>
-                                            <CTableHeaderCell scope="row">{index}</CTableHeaderCell>
+                                            <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                                             <CTableDataCell>{product.name}</CTableDataCell>
                                             <CTableDataCell>{product.desc}</CTableDataCell>
                                             <CTableDataCell>
-                                                <CImage rounded thumbnail width={200} src={product.link}/>
+                                                <CImage rounded thumbnail width={200} src='https://www.91-img.com/gallery_images_uploads/d/7/d7cf5e2b1a3a3dfcca8a8dbb524fb11a8fb1c8e8.JPG?tr=h-550,w-0,c-at_max'/>
                                             </CTableDataCell>
                                             <CTableDataCell>{product.price}</CTableDataCell>
                                             <CTableDataCell>
                                                 <CButtonGroup role="group" aria-label="Basic example" className="gap-2">
-                                                    <CButton color="warning" to='update' component={NavLink}
+                                                    <CButton color="warning" to={`update/${product.id}`} component={NavLink}
                                                              variant="outline">Edit</CButton>
-                                                    <CButton color="danger" variant="outline">Delete</CButton>
+                                                    <CButton color="danger" variant="outline" onClick={()=>(deleteProductMutate(product.id))}>Delete</CButton>
                                                 </CButtonGroup>
                                             </CTableDataCell>
                                         </CTableRow>
