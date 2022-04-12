@@ -22,37 +22,25 @@ export const customerApi = createApi({
             }
         }),
         addCustomer:builder.mutation({
-            query(arg) {
+            query(customer) {
                 return {
                     url :'customers',
                     method:"POST",
-                    body:arg.data
+                    body:customer
                 }
-            },
-            transformResponse(baseQueryReturnValue, meta, arg) {
-                if(arg && arg.onSuccess) {
-                    arg.onSuccess(baseQueryReturnValue)
-                }
-                return baseQueryReturnValue
             },
             invalidatesTags:[{type:'customers',id:'LIST'}]
         }),
         updateCustomer:builder.mutation({
-            query({data:customer}) {
+            query(customer) {
                 return {
                     url :`customers/${customer.id}`,
                     method:"PUT",
                     body:customer
                 }
             },
-            transformResponse(baseQueryReturnValue, meta, arg) {
-                if(arg && arg.onSuccess) {
-                    arg.onSuccess(baseQueryReturnValue)
-                }
-                return baseQueryReturnValue
-            },
-            invalidatesTags(result,context, {data}) {
-                return [{type:'customer',id:data.id},{type:'customers',id:'LIST'}]
+            invalidatesTags(result,context, {id}) {
+                return [{type:'customer',id},{type:'customers',id:'LIST'}]
             }
         }),
         deleteCustomer:builder.mutation({
@@ -70,6 +58,4 @@ export const customerApi = createApi({
     }),
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const { useGetAllCustomersQuery, useGetCustomerByIdQuery, useAddCustomerMutation, useUpdateCustomerMutation, useDeleteCustomerMutation } = customerApi

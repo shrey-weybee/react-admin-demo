@@ -1,10 +1,10 @@
 import {Route} from "react-router-dom";
 import Demo from "../../Demo";
 import DefaultLayout from "../../layout/DefaultLayout";
-import ProductListPage from "../../components/pages/product/ProductListPage";
-import ProductFormPage from "../../components/pages/product/ProductFormPage";
-import CustomerListPage from "../../components/pages/customer/CustomerListPage";
-import CustomerFormPage from "../../components/pages/customer/CustomerFormPage";
+import ProductListPage from "../../components/pages/product/ProductListPage/ProductListPage";
+import ProductFormPage from "../../components/pages/product/ProductFormPage/ProductFormPage";
+import CustomerListPage from "../../components/pages/customer/CustomerListPage/CustomerListPage";
+import CustomerFormPage from "../../components/pages/customer/CustomerFormPage/CustomerFormPage";
 
 const routes = [
     {
@@ -14,6 +14,7 @@ const routes = [
         children: [
             {
                 index:true,
+                name:'Demo',
                 element:Demo
             },
             {
@@ -58,9 +59,9 @@ export const getRoute=(route)=>{
     const Component = route.element
 
     if(!route.children){
-        return <Route {...route}  element={<Component />}  />
+        return <Route {...route} key={route.key || route.name || route.path}  element={<Component />}  />
     }
-    return <Route {...route}  element={<Component />} >
+    return <Route {...route} key={route.key || route.name || route.path} element={<Component />} >
         {route.children.map(getRoute)}
     </Route>
 

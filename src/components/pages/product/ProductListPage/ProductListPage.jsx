@@ -12,7 +12,7 @@ import {
 } from "@coreui/react";
 import {NavLink} from "react-router-dom";
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {deleteProduct, getAllProducts} from "../../../lib/query/productQuery";
+import {deleteProduct, getAllProducts} from "../../../../lib/query/productQuery";
 
 const ProductListPage = ({...props}) => {
     const queryClient = useQueryClient()

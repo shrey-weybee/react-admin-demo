@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useDeleteCustomerMutation, useGetAllCustomersQuery} from "../../../lib/redux/services/customer";
+import {useDeleteCustomerMutation, useGetAllCustomersQuery} from "../../../../lib/redux/services/customer";
 import {
     CButton,
     CButtonGroup,
@@ -52,8 +52,8 @@ const CustomerListPage = ({...props}) => {
                                 </CTableHead>
                                 <CTableBody>
                                     {customers && customers.map((customer, index) => (
-                                        <CTableRow key={index}>
-                                            <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                                        <CTableRow key={customer.id}>
+                                            <CTableHeaderCell scope="row">{customer.id}</CTableHeaderCell>
                                             <CTableDataCell>{customer.company}</CTableDataCell>
                                             <CTableDataCell>{customer.primary_contact}</CTableDataCell>
                                             <CTableDataCell>{customer.primary_email}</CTableDataCell>

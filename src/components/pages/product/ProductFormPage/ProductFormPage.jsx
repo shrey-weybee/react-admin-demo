@@ -10,7 +10,7 @@ import {
 import {Link,useNavigate,useParams  } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {useMutation} from "react-query";
-import {addProduct, getProductById, updateProduct} from "../../../lib/query/productQuery";
+import {addProduct, getProductById, updateProduct} from "../../../../lib/query/productQuery";
 import {useEffect} from "react";
 
 const ProductFormPage = ({...props}) => {
