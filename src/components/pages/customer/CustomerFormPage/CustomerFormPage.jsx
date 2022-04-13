@@ -8,7 +8,7 @@ import {
     CCol,
     CForm,
     CFormInput,
-    CFormLabel, CFormText, CFormTextarea,
+    CFormLabel, CFormText,
     CRow, CSpinner
 } from "@coreui/react";
 import {Link, useNavigate, useParams} from "react-router-dom";
@@ -17,19 +17,20 @@ import {useEffect} from "react";
 import {
     useGetCustomerByIdQuery,
     useAddCustomerMutation,
-    useUpdateCustomerMutation
+    useUpdateCustomerMutation, customerApi
 } from "../../../../lib/redux/services/customer";
+import {useDispatch} from "react-redux";
+
 
 const CustomerFormPage = ({...props}) => {
 
     const { customerId } = useParams();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } , setValue, reset } = useForm();
-
+    const dispatch = useDispatch();
     const [addCustomer] = useAddCustomerMutation()
     const [updateCustomer] = useUpdateCustomerMutation()
     const {data:customer, isLoading} = useGetCustomerByIdQuery(customerId,{skip:!customerId})
-
 
     useEffect(()=>{
         if(customerId && customer) {
@@ -43,9 +44,15 @@ const CustomerFormPage = ({...props}) => {
     },[customerId,customer])
 
     const onSubmit = async data => {
-        console.log(data)
+
         if(data.id){
-            await updateCustomer(data)
+            const {data:customer} = await updateCustomer(data)
+            console.log(customer)
+            dispatch(customerApi.util.updateQueryData('getAllCustomers', undefined , (draft)=>{
+                        const index = draft.findIndex(x=>x.id==data.id)
+                        draft[index] = {...customer}
+                    })
+                )
         }else {
             await addCustomer(data)
         }

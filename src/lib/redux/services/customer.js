@@ -8,7 +8,7 @@ export const customerApi = createApi({
     tagTypes:['customers'],
     endpoints: (builder) => ({
         getAllCustomers:builder.query({
-            query(arg) {
+            query() {
                 return 'customers'
             },
             providesTags:[{type:'customers',id:'LIST'}]
@@ -29,7 +29,17 @@ export const customerApi = createApi({
                     body:customer
                 }
             },
-            invalidatesTags:[{type:'customers',id:'LIST'}]
+            async onQueryStarted({ ...patch }, { dispatch, queryFulfilled }) {
+                try {
+                    const { data: customer } = await queryFulfilled
+                    const patchResult = dispatch(
+                        customerApi.util.updateQueryData('getAllCustomers', undefined, (draft) => {
+                            draft.push({...customer})
+                        })
+                    )
+                } catch {}
+            },
+            // invalidatesTags:[{type:'customers',id:'LIST'}]
         }),
         updateCustomer:builder.mutation({
             query(customer) {
@@ -40,7 +50,7 @@ export const customerApi = createApi({
                 }
             },
             invalidatesTags(result,context, {id}) {
-                return [{type:'customer',id},{type:'customers',id:'LIST'}]
+                return [{type:'customer',id}]
             }
         }),
         deleteCustomer:builder.mutation({
@@ -50,8 +60,19 @@ export const customerApi = createApi({
                     method:"DELETE",
                 }
             },
+            async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    const patchResult = dispatch(
+                        customerApi.util.updateQueryData('getAllCustomers', undefined, (draft) => {
+                            const index = draft.findIndex(x=>x.id==id)
+                            draft.splice(index,1)
+                        })
+                    )
+                } catch {}
+            },
             invalidatesTags(result,context, id) {
-                return [{type:'customer',id},{type:'customers',id:'LIST'}]
+                return [{type:'customer',id}]
             }
         }),
 
