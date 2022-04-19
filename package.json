@@ -30,7 +30,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "auth-server": "cd fake-server && npm run auth-server-start",
+    "dev-server": "cd fake-server && npm run server-start",
+    "dev": "concurrently --kill-others \"npm run start\" \"npm run auth-server\""
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^7.1.0",
     "sass": "^1.49.11"
   }
 }

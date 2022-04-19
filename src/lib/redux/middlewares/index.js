@@ -1,8 +1,7 @@
-import {customerApi} from "../services/customer";
+import { customerApi } from '../services/customer';
 
-const getRootMiddlewares = (getDefaultMiddleware,rest=[])=>{
-    return getDefaultMiddleware().concat(...rest,customerApi.middleware)
-}
+const getRootMiddlewares = (getDefaultMiddleware, rest = []) => {
+  return getDefaultMiddleware().concat(...rest, customerApi.middleware);
+};
 
-
-export default getRootMiddlewares
+export default getRootMiddlewares;

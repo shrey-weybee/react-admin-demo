@@ -3,7 +3,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
 const middlewares = jsonServer.defaults();
 const jwt = require('jsonwebtoken');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const TOKEN_KEY = 'abcdejfhajkfhkjdhlafkjhsdjkfhaslkf';
 
 const bypassUrls = [
